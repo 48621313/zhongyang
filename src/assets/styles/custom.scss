@@ -1,0 +1,91 @@
+// 浅色模式
+$color-main: #3A78F2; // 主色
+$color-assist-danger: #fe5858; // 辅助色
+$color-assist-success: #00ad1e; // 辅助色
+$color-assist-warning: #FFC051; // 辅助色
+$color-importance-text: #0F1724; // 重要文字
+$color-minor-text: #545965; // 次要文字
+$color-assist-text: #939cbc; // 辅助文字
+$color-bg: #F0F2F7; // 背景色/分割线
+
+// 深色模式
+$color-main-dp: #4778E9; // 主色
+$color-assist-danger-dp: #E95247; // 辅助色
+$color-assist-success-dp: #60b158; // 辅助色
+$color-assist-warning-dp: #febc2c; // 辅助色
+$color-importance-text-dp: #fff; // 重要文字
+$color-minor-text-dp: #e4e5e5; // 次要文字
+$color-assist-text-dp: #959799; // 辅助文字
+$color-bg-dp: #212529; // 背景色
+$color-transition-dp: #2B2F33; // 过渡色
+$color-split-dp: #3b4045; // 分割线
+
+
+// 字体大小
+$font-size-title: 18px; // 重要性标题
+$font-size-title-minor: 16px; // 菜单文字
+$font-size-common: 14px; // 正文
+$font-size-assist: 12px; // 辅助文字
+
+.flex-no-wrap{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+// 通用样式
+.page-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    padding: 30px 0 0 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    .page-radius{
+        border-radius: 12px;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    .page-common {
+        width: 100%;
+        height: 100%;
+        padding: 30px;
+        box-sizing: border-box;
+        background: #fff;
+        overflow: auto;
+        .title-common {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .tit-lf {
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                color: #0F1724;
+            }
+
+            .tit-before {
+                &::before {
+                    margin-right: 20px;
+                    content: '';
+                    display: block;
+                    width: 6px;
+                    height: 24px;
+                    background-color: #3A78F2;
+                    border-radius: 3px 3px 3px 3px;
+                }
+            }
+            .tit-rt{
+                
+            }
+        }
+
+    }
+}

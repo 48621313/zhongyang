@@ -1,0 +1,40 @@
+.progress-box {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .schedule {
+        font-size: 16px;
+        color: #0F1724;
+        margin-right: 24px;
+    }
+
+    ::v-deep .el-slider {
+        width: 140px;
+        height: 4px;
+
+        .el-slider__runway {
+            margin: 0;
+        }
+
+        .el-slider__button-wrapper {
+            &:hover {
+                border-radius: 50%;
+                background: rgba(58, 120, 242, 0.1);
+            }
+            .el-slider__button {
+                &:focus {
+                    background: #3A78F2;
+                }
+            }
+        }
+        .dragging{
+            border-radius: 50%;
+            // background: rgba(58,120,242,0.4)!important;
+            background: rgba(58,120,242,0.4)!important;
+            .el-slider__button{
+                background: #3A78F2;
+            }
+        }
+    }
+}

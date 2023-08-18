@@ -1,0 +1,115 @@
+.page-wrapper{
+    background: #F0F2F7;
+    user-select: none;
+}
+.around {
+    width: 100px;
+    height: 48px;
+    text-align: center;
+    position: fixed;
+    color: #fff;
+    background-color: blue;
+    z-index: 555;
+    overflow: hidden;
+    user-select: none;
+    transition: all .1s;
+
+    p {
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        margin: 0;
+    }
+}
+.mobile-main {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    user-select: none;
+    .box-out{
+        padding: 28px;
+        position: relative;
+        // background-color: BLUE;
+        .bg{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            // transform: scale(1.4, 1.2);
+        }
+    }
+    .box {
+        position: relative;
+        box-sizing: content-box;
+    }
+    .video {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 333;
+        border-radius: 34px;
+        overflow: hidden;
+
+        .main {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .canvas {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        left: 0;
+        top: 0;
+        z-index: 444;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        #canvas {
+            width: 100%;
+            height: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+}
+
+// 功能块
+.mobile-feature {
+    width: 226px;
+    margin: 40px 0 0 40px;
+    .one {
+        width: 100%;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        border-radius: 12px 12px 12px 12px;
+        background: #FFFFFF;
+        box-shadow: 0px 3px 14px 1px rgba(58, 120, 242, 0.15);
+        &:hover{
+            background-color: #E8F0FF;
+            
+        }
+        cursor: pointer;
+        .icon-common {
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            margin: 0 15px 0 36px;
+        }
+        .label {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 16px;
+            color: #0F1724;
+        }
+    }
+}

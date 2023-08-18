@@ -1,0 +1,326 @@
+#app {
+  position: relative;
+
+  .app-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .main-container {
+    flex: 1;
+    height: 100%;
+    transition: margin-left .28s;
+    margin-left: 30px;
+    position: relative;
+  }
+
+  .sidebarHide {
+    margin-left: 0 !important;
+  }
+
+  .sidebar-container {
+
+    border-radius: 12px 12px 12px 12px;
+    -webkit-transition: width .28s;
+    transition: width 0.28s;
+    flex-shrink: 0;
+    width: $base-sidebar-width !important;
+    height: 100%;
+    font-size: 0px;
+    z-index: 1001;
+    overflow: hidden;
+    background: #3A78F2;
+
+    // 111 自定义menu样式
+    .el-submenu__title {
+      margin: 0;
+      padding: 0 !important;
+      i {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+    .el-menu-item {
+      height: 60px;
+      line-height: 60px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .el-menu {
+      padding: 0 18px;
+      .el-submenu__icon-arrow {
+        right: 18px;
+      }
+    }
+    .el-submenu {
+      padding: 0!important;
+      .el-submenu__title{
+        padding: 0 18px!important;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .el-menu {
+        padding: 0 0 0 0;
+        position: relative;
+        width: 100%;
+        padding-left: 30px;
+        box-sizing: border-box;
+        .el-menu-item{
+          padding-left: 18px!important;
+        }
+        &::after {
+          content: "";
+          display: block;
+          width: 2px;
+          height: 100%;
+          position: absolute;
+          left: 18px;
+          top: 0;
+          background-color: rgba(255,255,255,0.5);
+        }
+      }
+    }
+
+
+   
+
+    // reset element-ui css
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: 100%;
+    }
+
+    &.has-logo {
+      .el-scrollbar {
+        height: calc(100% - 50px);
+      }
+    }
+
+    .is-horizontal {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .svg-icon {
+      margin-right: 16px;
+    }
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+    }
+
+    // .el-menu-item,.el-submenu{
+    //   margin-top: 20px;
+    // }
+    .el-menu-item,
+    .el-submenu__title {
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+
+    // menu hover
+    .submenu-title-noDropdown,
+    .el-submenu__title {
+      &:hover {
+        background-color: $base-sub-menu-hover !important;
+      }
+    }
+
+    & .theme-dark .is-active {
+      background-color: #fff !important;
+      color: $base-menu-color-active !important;
+    }
+
+
+    & .theme-dark .is-active>.el-submenu__title {
+      color: #fff !important;
+
+      &:hover {
+        background-color: #fff !important;
+        color: $base-menu-color-active !important;
+      }
+    }
+
+
+    & .nest-menu .el-submenu>.el-submenu__title,
+    & .el-submenu .el-menu-item {
+      // min-width: $base-sidebar-width !important;
+      width: 100% !important;
+      margin: 0;
+      padding: 0;
+      // 111  设置子sub
+    }
+
+    & .theme-dark .nest-menu .el-submenu>.el-submenu__title,
+    & .theme-dark .el-submenu .el-menu-item {
+      background-color: $base-sub-menu-background;
+
+      &:hover {
+        background-color: $base-sub-menu-hover !important;
+      }
+    }
+
+    & .theme-dark .el-submenu .is-active {
+      &:hover {
+        background-color: #fff !important;
+        color: $base-menu-color-active !important;
+      }
+    }
+
+    // 111
+    & .theme-dark .is-opened {
+      background-color: #3A78F2 !important;
+
+      .el-submenu__title {
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          // background-color: #232123!important;
+          color: rgba(255, 255, 255, 0.9) !important;
+        }
+      }
+    }
+
+  }
+
+  .hideSidebar {
+    .sidebar-container {
+      width: 54px !important;
+    }
+
+    .main-container {
+      margin-left: 54px;
+    }
+
+    .submenu-title-noDropdown {
+      padding: 0 !important;
+      position: relative;
+
+      .el-tooltip {
+        padding: 0 !important;
+
+        .svg-icon {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .el-submenu {
+      overflow: hidden;
+
+      &>.el-submenu__title {
+        padding: 0 !important;
+
+        .svg-icon {
+          margin-left: 20px;
+        }
+
+      }
+    }
+
+    .el-menu--collapse {
+      .el-submenu {
+        &>.el-submenu__title {
+          &>span {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .el-menu--collapse .el-menu .el-submenu {
+    min-width: $base-sidebar-width !important;
+  }
+
+  // mobile responsive
+  .mobile {
+    .main-container {
+      margin-left: 0px;
+    }
+
+    .sidebar-container {
+      transition: transform .28s;
+      width: $base-sidebar-width !important;
+    }
+
+    &.hideSidebar {
+      .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-$base-sidebar-width, 0, 0);
+      }
+    }
+  }
+
+  .withoutAnimation {
+
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+  }
+}
+
+
+
+
+// when menu collapsed
+.el-menu--vertical {
+  &>.el-menu {
+    .svg-icon {
+      margin-right: 16px;
+    }
+  }
+
+  .nest-menu .el-submenu>.el-submenu__title,
+  .el-menu-item {
+    &:hover {
+      // you can use $subMenuHover
+      background-color: $base-sub-menu-hover !important;
+    }
+  }
+
+
+
+  // the scroll bar appears when the subMenu is too long
+  >.el-menu--popup {
+    max-height: 100vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-track-piece {
+      background: #d3dce6;
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #99a9bf;
+      border-radius: 20px;
+    }
+  }
+}
