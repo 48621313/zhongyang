@@ -97,3 +97,27 @@
   font-size: 14px;
   border-radius: 4px;
 }
+
+
+// 表格操作栏按钮
+.tb-ac-btn {
+  display: inline-block;
+  padding: 0 12px;
+  height: 24px;
+  font-size: 14px;
+  color: #3A78F2;
+  line-height: 24px;
+  padding-right: 12px;
+  border-right: 1px solid #F0F2F7;
+  margin: 0!important;
+  &.danger{
+    color: #ED4B42;
+  }
+  &:nth-of-type(1) {
+      padding-left: 0;
+  }
+  &:nth-last-of-type(1) {
+      border-right: 1px solid transparent;
+      padding-right: 0;
+  }
+}

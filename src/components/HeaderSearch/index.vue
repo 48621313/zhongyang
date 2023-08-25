@@ -8,7 +8,7 @@
       filterable
       default-first-option
       remote
-      placeholder="Search"
+      placeholder="搜索常用功能快速直达"
       class="header-search-select"
       @change="change"
     >
@@ -151,10 +151,11 @@ export default {
 <style lang="scss" scoped>
 .header-search {
   font-size: 0 !important;
-
   .search-icon {
     cursor: pointer;
-    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: rgba(84,89,101,0.5);
     vertical-align: middle;
   }
 
@@ -173,15 +174,18 @@ export default {
       border: 0;
       padding-left: 0;
       padding-right: 0;
+      color: #0F1724;
       box-shadow: none !important;
-      border-bottom: 1px solid #d9d9d9;
       vertical-align: middle;
+      &::placeholder{
+        color: rgba(84,89,101,0.5);
+      }
     }
   }
 
   &.show {
     .header-search-select {
-      width: 210px;
+      width: 240px;
       margin-left: 10px;
     }
   }

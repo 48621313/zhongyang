@@ -12,6 +12,7 @@
     transition: margin-left .28s;
     margin-left: 30px;
     position: relative;
+    overflow: hidden;
   }
 
   .sidebarHide {
@@ -19,7 +20,6 @@
   }
 
   .sidebar-container {
-
     border-radius: 12px 12px 12px 12px;
     -webkit-transition: width .28s;
     transition: width 0.28s;
@@ -35,39 +35,51 @@
     .el-submenu__title {
       margin: 0;
       padding: 0 !important;
+
       i {
         font-size: 16px;
         color: rgba(255, 255, 255, 0.9);
       }
     }
+
     .el-menu-item {
       height: 60px;
       line-height: 60px;
       border-radius: 5px;
       overflow: hidden;
     }
+
     .el-menu {
       padding: 0 18px;
+
+      .el-submenu__title {
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
       .el-submenu__icon-arrow {
         right: 18px;
       }
     }
+
     .el-submenu {
-      padding: 0!important;
-      .el-submenu__title{
-        padding: 0 18px!important;
-        border-radius: 5px;
-        overflow: hidden;
+      padding: 0 !important;
+
+      .el-submenu__title {
+        padding: 0 18px !important;
       }
+
       .el-menu {
         padding: 0 0 0 0;
         position: relative;
         width: 100%;
         padding-left: 30px;
         box-sizing: border-box;
-        .el-menu-item{
-          padding-left: 18px!important;
+
+        .el-menu-item {
+          padding-left: 18px !important;
         }
+
         &::after {
           content: "";
           display: block;
@@ -76,13 +88,13 @@
           position: absolute;
           left: 18px;
           top: 0;
-          background-color: rgba(255,255,255,0.5);
+          background-color: rgba(255, 255, 255, 0.5);
         }
       }
     }
 
 
-   
+
 
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -95,6 +107,10 @@
 
     .el-scrollbar__bar.is-vertical {
       right: 0px;
+      .el-scrollbar__thumb{
+        // 测试滚动条颜色
+        background-color: red;
+      }
     }
 
     .el-scrollbar {
@@ -103,7 +119,7 @@
 
     &.has-logo {
       .el-scrollbar {
-        height: calc(100% - 50px);
+        height: calc(100% - 174px);
       }
     }
 
@@ -137,68 +153,50 @@
       white-space: nowrap !important;
     }
 
-    // menu hover
-    .submenu-title-noDropdown,
-    .el-submenu__title {
-      &:hover {
-        background-color: $base-sub-menu-hover !important;
-      }
-    }
-
-    & .theme-dark .is-active {
-      background-color: #fff !important;
-      color: $base-menu-color-active !important;
-    }
-
-
-    & .theme-dark .is-active>.el-submenu__title {
-      color: #fff !important;
-
-      &:hover {
-        background-color: #fff !important;
-        color: $base-menu-color-active !important;
-      }
-    }
-
-
     & .nest-menu .el-submenu>.el-submenu__title,
     & .el-submenu .el-menu-item {
-      // min-width: $base-sidebar-width !important;
       width: 100% !important;
       margin: 0;
       padding: 0;
-      // 111  设置子sub
     }
 
-    & .theme-dark .nest-menu .el-submenu>.el-submenu__title,
-    & .theme-dark .el-submenu .el-menu-item {
-      background-color: $base-sub-menu-background;
-
+    // hover 状态全~!!
+    // menu hover
+    //  通用 hover 色
+    & .theme-dark .submenu-title-noDropdown {
+      background-color: $base-sub-menu-background!important;
       &:hover {
         background-color: $base-sub-menu-hover !important;
       }
     }
-
-    & .theme-dark .el-submenu .is-active {
+    & .theme-dark .submenu-title-noDropdown.is-active{
+      background-color: #fff!important;
+      color: #3A78F2!important;
+      &:hover{
+        background-color: #fff!important;
+      color: #3A78F2!important;
+      }
+    }
+    & .theme-dark .el-submenu>.el-submenu__title{
+      background-color: $base-sub-menu-background!important;
       &:hover {
-        background-color: #fff !important;
-        color: $base-menu-color-active !important;
+        background-color: $base-sub-menu-hover !important;
       }
     }
-
-    // 111
-    & .theme-dark .is-opened {
-      background-color: #3A78F2 !important;
-
-      .el-submenu__title {
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.1) !important;
-          // background-color: #232123!important;
-          color: rgba(255, 255, 255, 0.9) !important;
-        }
+    & .theme-dark .nest-menu .el-menu-item{
+      background-color: $base-sub-menu-background!important;
+      &:hover {
+        background-color: $base-sub-menu-hover !important;
       }
     }
-
+    & .theme-dark .nest-menu a>.is-active{
+      background-color: #fff!important;
+      color: #3A78F2!important;
+      &:hover{
+        background-color: #fff!important;
+      color: #3A78F2!important;
+      }
+    }
   }
 
   .hideSidebar {
@@ -287,7 +285,7 @@
 
 
 
-// when menu collapsed
+// 菜单折叠
 .el-menu--vertical {
   &>.el-menu {
     .svg-icon {
@@ -295,15 +293,17 @@
     }
   }
 
-  .nest-menu .el-submenu>.el-submenu__title,
-  .el-menu-item {
-    &:hover {
-      // you can use $subMenuHover
-      background-color: $base-sub-menu-hover !important;
-    }
-  }
-
-
+  // .nest-menu .el-submenu>.el-submenu__title,
+  // .el-menu-item {
+  //   &:hover {
+  //     background-color: $base-sub-menu-hover !important;
+  //   }
+  // }
+  // .is-active>.el-submenu__title{
+  //   &:hover {
+  //     background-color: $base-sub-menu-hover !important;
+  //   }
+  // }
 
   // the scroll bar appears when the subMenu is too long
   >.el-menu--popup {
@@ -321,6 +321,7 @@
     &::-webkit-scrollbar-thumb {
       background: #99a9bf;
       border-radius: 20px;
+
     }
   }
 }

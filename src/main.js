@@ -5,6 +5,13 @@ import Cookies from 'js-cookie'
 import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
 
+// 修改element-ui分页文字
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+zhLocale.el.pagination = {pagesize: '条/页',total: `共 {total} 条`,goto: '跳至',pageClassifier: '页'
+}
+
+
+
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
 import App from './App'

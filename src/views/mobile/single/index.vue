@@ -1,5 +1,4 @@
 <template>
-    <!-- x: {{ position.x }} y: {{ position.y }} {{ page.x }} {{ page.y }} -->
     <div class="page-wrapper">
         <div class="page-radius">
             <div class="page-common">
@@ -11,7 +10,8 @@
                 </div>
                 <div class="mobile-main">
                     <!-- 手机显示区域 -->
-                    <div class="box-out">
+                    <div class="box-out"
+                        :style="{ padding: `${padding_cent}px`, width: `${rectangle.width}px`, height: `${rectangle.height}px` }">
                         <!-- 手机壳 -->
                         <el-image class="bg" :src="require('../../../assets/images/iphone.png')" fit="fill"></el-image>
                         <!-- 此处设置宽高 -->
@@ -33,7 +33,8 @@
                     </ul>
                 </div>
                 <!-- 鼠标跟随 -->
-                <div class="around" v-if="isDragging" :style="{ top: `${page.y + 10}px`, left: `${page.x + 10}px` }">
+                <div class="around" v-if="isDragging && page.y > 0 && page.x > 0"
+                    :style="{ top: `${page.y + 10}px`, left: `${page.x + 10}px` }">
                     <p>x: {{ position.x }}</p>
                     <p>y: {{ position.y }}</p>
                 </div>
@@ -54,10 +55,11 @@ export default {
     data() {
         return {
             rectangle: {
-                width: '296',
-                height: '635'
+                width: 296,
+                height: 635
             },
-            precent: 0,
+            padding_cent: 28,
+            precent: 50,
             icon_arr: [
                 { url: require('@/assets/images/desktop.png'), label: '桌面', method: 'a' },
                 { url: require('@/assets/images/calibrate.png'), label: '效准', method: 'a' },
@@ -85,11 +87,15 @@ export default {
         }
     },
     watch: {
-        precent: function (val) {
-            let value = 1 + (val / 100)
-            this.rectangle.width = value * 296
-            this.rectangle.height = value * 635
-        }
+        precent: {
+            handler(val) {
+                let value = 0.5 + (val / 100)
+                this.rectangle.width = value * 296
+                this.rectangle.height = value * 635
+                this.padding_cent = value * 28
+            },
+            immediate: true,
+        } 
     },
     mounted() {
         this.init()

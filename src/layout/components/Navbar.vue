@@ -1,5 +1,6 @@
 <template>
   <div class="navbar">
+    <!-- 左侧导航栏收齐操作 -->
     <!-- <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
     <div class="left-search">
       <search id="header-search" class="right-menu-item" />
@@ -8,7 +9,11 @@
     <top-nav id="topmenu-container" class="topmenu-container" v-if="topNav" />
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
-        <el-image class="header-img" :src="require('@/assets/images/remind.png')" fit="fill"></el-image>
+        <span class="img-ps">
+          <el-image class="header-img" :src="require('@/assets/images/remind.png')" fit="fill">
+          </el-image>
+          <span class="mes-num">12</span>
+        </span>
         <el-image class="header-img" :src="require('@/assets/images/setting.png')" fit="fill"></el-image>
         <!-- <search id="header-search" class="right-menu-item" />
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
@@ -109,11 +114,13 @@ export default {
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
   border-radius: 12px 12px 12px 12px;
-  .left-search{
+
+  .left-search {
     float: left;
     margin-left: 30px;
     line-height: 60px;
   }
+
   .hamburger-container {
     line-height: 46px;
     height: 100%;
@@ -147,12 +154,33 @@ export default {
     display: flex;
     align-items: center;
     line-height: 60px;
-
+    .img-ps{
+      display: flex;
+      align-items: center;
+      line-height: 60px;
+      position: relative;
+      .mes-num {
+        right: -7px;
+        top: -7px;
+        line-height: 1;
+        position: absolute;
+        display: inline-block;
+        font-size: 12px;
+        min-width: 20px;
+        padding: 4px;
+        text-align: center;
+        border-radius: 50%;
+        color: #fff;
+        background-color: #ED4B42;
+        z-index: 11;
+      }
+    }
     .header-img {
       width: 22px;
       height: 22px;
       margin-left: 28px;
       cursor: pointer;
+      z-index: 1;
     }
 
     &:focus {
@@ -186,10 +214,11 @@ export default {
         height: 42px;
         border: 1px solid #E8ECEE;
         border-radius: 50%;
-        margin: 0 8px 0 20px;       
+        margin: 0 8px 0 20px;
         position: relative;
         box-sizing: border-box;
         cursor: pointer;
+
         .user-avatar {
           width: 100%;
           height: 100%;
@@ -205,11 +234,11 @@ export default {
         }
       }
     }
-    .name{
+
+    .name {
       margin-right: 30px;
       color: #545965;
       font-size: 14px;
     }
   }
-}
-</style>
+}</style>

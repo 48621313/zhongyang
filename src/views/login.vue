@@ -160,7 +160,10 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  margin: -30px;
+  // box-sizing: content-box;
   background-image: url("../assets/images/login-background.jpg");
   background-size: cover;
 }

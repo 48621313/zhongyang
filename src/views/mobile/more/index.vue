@@ -19,38 +19,46 @@
                     <div class="right">
                         <div class="feature">
                             <div class="lf flex-center">
-                                <el-image class="icon-common" :src="leftImg" fit="fill"></el-image>
+                                <el-image class="icon-common" :src="leftImg" fit="fill" @click="move('lf')"></el-image>
                             </div>
-                            <div class="center">
-                                <li class="one" v-for="i in icon_arr" :key="i.label">
-                                    <el-tooltip class="item" effect="dark" :content="i.label" placement="top">
-                                        <el-image class="icon-common" :src="i.url" fit="fill"></el-image>
-                                    </el-tooltip>
-                                </li>
+                            <div class="center" ref="father">
+                                <ul :style="{ transform: `translateX(${traslateX}px)` }" ref="child">
+                                    <li class="one" v-for="i in icon_arr" :key="i.label">
+                                        <el-tooltip class="item" effect="dark" :content="i.label" placement="top">
+                                            <el-image class="icon-common" :src="i.url" fit="fill"></el-image>
+                                        </el-tooltip>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="rt flex-center">
-                                <el-image class="icon-common" :src="rightImg" fit="fill"></el-image>
+                                <el-image class="icon-common" :src="rightImg" fit="fill" @click="move('rt')"></el-image>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row-box">
+                    <!-- :style="{transform: `scale(${scale})`, transformOrigin: 'left top'}"  :style="{zoom: `${scale}`}"  -->
                     <div class="mobile-main" v-for="(i, j) in device_arr">
                         <!-- 设备号 -->
                         <div class="top">
                             <el-image class="choice" v-if="i.value" :src="checkImg" fit="fill"
                                 @click="changeChoice(i)"></el-image>
-                            <el-image class="choice" v-else :src="unCheckImg" fit="fill" @click="changeChoice(i)"></el-image>
+                            <el-image class="choice" v-else :src="unCheckImg" fit="fill"
+                                @click="changeChoice(i)"></el-image>
                             <span class="label">{{ i.label }}</span>
                         </div>
-                        <!-- 手机与操作 -->
+                        <!-- 手机与操作 25%的区域缩放 -->
                         <div class="bottom flex-no-wrap">
                             <!-- 手机显示区域 -->
-                            <div class="box-out">
+                            <!-- transform: `scale(${scale})`, -->
+                            <div class="box-out"
+                                :style="{  padding: `${padding_cent}px`, width: `${rectangle.width}px`, height: `${rectangle.height}px` }">
                                 <!-- 手机壳 -->
-                                <el-image class="bg" :src="require('../../../assets/images/iphone1.png')" fit="fill"></el-image>
+                                <el-image class="bg" :src="require('../../../assets/images/iphone.png')"
+                                    fit="fill"></el-image>
                                 <!-- 此处设置宽高 -->
-                                <div :style="{ width: `${rectangle.width}px`, height: `${rectangle.height}px` }" class="box">
+                                <div :style="{  width: `${rectangle.width}px`, height: `${rectangle.height}px` }"
+                                    class="box">
                                     <div class="video" style="opacity: 1;">
                                         <video :id="`videoElement${j}`" class="main" autoplay muted></video>
                                     </div>
@@ -60,21 +68,22 @@
                                 </div>
                             </div>
                             <!-- 右侧功能栏 -->
-                            <ul class="mobile-feature" :style="{ height: `${rectangle.height}px` }">
+                            <ul class="mobile-feature" :style="{minHeight: `${rectangle.height}px` }">
                                 <li class="one" v-for="i in icon_arr" :key="i.label">
                                     <el-tooltip class="item" effect="dark" :content="i.label" placement="top">
                                         <el-image class="icon-common" :src="i.url" fit="fill"></el-image>
                                     </el-tooltip>
                                 </li>
                                 <li class="one">
-                                    <el-image class="icon-common" :src="rightImg" fit="fill"></el-image>
+                                    <el-image class="icon-common" :src="rightImg" fit="fill" ></el-image>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <!-- 鼠标跟随 -->
-                <div class="around" v-if="isDragging" :style="{ top: `${page.y + 10}px`, left: `${page.x + 10}px` }">
+                <div class="around" v-if="isDragging && page.y > 0 && page.x > 0"
+                    :style="{ top: `${page.y + 10}px`, left: `${page.x + 10}px` }">
                     <p>x: {{ position.x }}</p>
                     <p>y: {{ position.y }}</p>
                 </div>
@@ -94,12 +103,18 @@ export default {
     },
     data() {
         return {
+            // 根据屏幕调整宽度
+            window_width: undefined,
+            scale: 1,
+            // 图片
             checkImg: require('@/assets/images/checked.png'),
             unCheckImg: require('@/assets/images/unchecked.png'),
             leftImg: require('@/assets/images/left.png'),
             rightImg: require('@/assets/images/right.png'),
-
-            precent: 0,
+            // 布局
+            traslateX: 0,
+            padding_cent: 24,
+            precent: 100,
             icon_arr: [
                 { url: require('@/assets/images/desktop.png'), label: '桌面', method: 'a' },
                 { url: require('@/assets/images/calibrate.png'), label: '效准', method: 'a' },
@@ -116,8 +131,8 @@ export default {
             page: { x: 0, y: 0 },
             isDragging: false,
             rectangle: {
-                width: '253',
-                height: '543'
+                width: 253,
+                height: 543
             },
             checkAll: false,
             device_arr: [
@@ -142,13 +157,31 @@ export default {
         }
     },
     watch: {
-        precent: function (val) {
-            let value = 1 + (val / 100)
-            this.rectangle.width = value * 253
-            this.rectangle.height = value * 543
+        precent: {
+            handler(val) {
+                // let value = 0 + (val / 100)
+                // this.rectangle.width = value * 253 * this.scale
+                // this.rectangle.height = value * 543 * this.scale
+                // this.padding_cent = value * 24 * this.scale
+            },
+            immediate: false,
+        },
+        window_width(val) {
+            if (val) {
+                let scale = val / 1920
+                // this.padding_cent = 24 * scale
+                // this.rectangle.width = 253 * scale
+                // this.rectangle.height = 543 * scale
+                this.scale = scale
+                console.log(val, scale,  this.padding_cent,  this.rectangle, '屏幕变化');
+                // this.padding_cent = value * 24
+               
+            }
         }
     },
     mounted() {
+        console.log(document.documentElement.clientWidth, '屏幕宽度');
+        this.window_width = document.documentElement.clientWidth
         this.device_arr.forEach((i, j) => {
             this.$nextTick(() => {
                 this.init(j)
@@ -163,6 +196,32 @@ export default {
         })
     },
     methods: {
+        // 左右切换最终版。。
+        move(direction) {
+            try {
+                let father = this.$refs.father.clientWidth  // 1266   
+                let child = this.$refs.child.clientWidth // 1428     移动一行
+                console.log(direction, father, child);
+                let traslateX = this.traslateX 
+                if (direction === 'rt') {
+                    traslateX -= father
+                    if (Math.abs(traslateX) >= child) {
+                        return false
+                    } else {
+                        this.traslateX = traslateX
+                    }
+                } else {
+                    traslateX += father
+                    if (traslateX >= 0) {
+                        traslateX = 0
+                    }
+                    this.traslateX = traslateX
+                }
+            } catch (err) {
+                console.log(err);
+            }
+            
+        },
         // 选择
         changeChoice(i) {
             i.value = !i.value
